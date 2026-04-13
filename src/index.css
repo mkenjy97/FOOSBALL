@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+@import "leaflet/dist/leaflet.css";
+
+:root {
+  --brand: #e6b600;
+  --brand-text: #e6b600;
+  --bg-primary: #070e27;
+  --bg-secondary: #1a233b;
+  --bg-card: #0c163b;
+  --bg-image: radial-gradient(circle at 50% -20%, #152252 0%, #070e27 100%);
+  --text-primary: #ffffff;
+  --text-secondary: #94a3b8;
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --border-primary: rgba(255, 255, 255, 0.1);
+  --map-filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
+}
+
+.light {
+  --bg-primary: #f8fafc;
+  --bg-secondary: #f1f5f9;
+  --bg-card: #ffffff;
+  --bg-image: radial-gradient(circle at 50% -20%, #e2e8f0 0%, #f8fafc 100%);
+  --brand-text: #856400;
+  --text-primary: #070e27;
+  --text-secondary: #64748b;
+  --glass-bg: rgba(0, 0, 0, 0.02);
+  --glass-border: rgba(0, 0, 0, 0.05);
+  --border-primary: rgba(15, 23, 42, 0.08);
+  --map-filter: none;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-primary);
+  background-image: var(--bg-image);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+}
+
+.neon-border {
+  border: 1px solid var(--brand);
+  box-shadow: 0 0 15px rgba(230, 182, 0, 0.15);
+}
+
+.score-text {
+  font-family: 'Inter', sans-serif;
+  font-weight: 900;
+  letter-spacing: -2px;
+}
+
+/* Map Styling */
+.theme-aware-map .leaflet-container {
+  background: var(--bg-secondary) !important;
+  border-radius: 20px;
+  border: 1px solid var(--border-primary);
+}
+
+.theme-aware-map .leaflet-tile-pane {
+  filter: var(--map-filter);
+}
+
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out {
+  background-color: var(--bg-card) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-primary) !important;
+}
+
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  background: var(--bg-card) !important;
+  color: var(--text-primary) !important;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  border: 1px solid var(--brand);
+}
+
+.leaflet-marker-icon {
+  filter: drop-shadow(0 0 5px var(--brand));
+}
