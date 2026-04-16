@@ -68,6 +68,9 @@ export default function RegisterLocation() {
         if (!newLocation.name.trim()) return;
         setLoading(true);
         try {
+            const isSuperadmin = user.role === 'superadmin';
+            const locStatus = isSuperadmin ? 'confirmed' : 'pending';
+
             const locRef = await addDoc(collection(db, "locations"), {
                 name: newLocation.name,
                 city: newLocation.city,
@@ -75,30 +78,36 @@ export default function RegisterLocation() {
                 longitude: newLocation.lng || 0,
                 createdBy: user.uid,
                 createdAt: serverTimestamp(),
-                status: 'pending'
+                status: locStatus
             });
 
-            // Notify Managers
-            const q = query(collection(db, "players"), where("role", "==", "manager"));
-            const snap = await getDocs(q);
-            
-            const batch = writeBatch(db);
-            snap.docs.forEach(mgrDoc => {
-                const notifRef = doc(collection(db, "notifications"));
-                batch.set(notifRef, {
-                    recipientId: mgrDoc.id,
-                    senderId: user.uid,
-                    senderName: user.name || user.email,
-                    type: 'location_proposal',
-                    locationId: locRef.id,
-                    locationName: newLocation.name,
-                    status: 'unread',
-                    createdAt: serverTimestamp()
+            if (!isSuperadmin) {
+                // Notify Managers
+                const q = query(collection(db, "players"), where("role", "==", "manager"));
+                const snap = await getDocs(q);
+                
+                const batch = writeBatch(db);
+                snap.docs.forEach(mgrDoc => {
+                    const notifRef = doc(collection(db, "notifications"));
+                    batch.set(notifRef, {
+                        recipientId: mgrDoc.id,
+                        senderId: user.uid,
+                        senderName: user.name || user.email,
+                        type: 'location_proposal',
+                        locationId: locRef.id,
+                        locationName: newLocation.name,
+                        status: 'unread',
+                        createdAt: serverTimestamp()
+                    });
                 });
-            });
-            await batch.commit();
+                await batch.commit();
+            }
 
-            navigate('/locations', { state: { message: t('registerLoc.successMsg', 'Proposal submitted! A manager will review it soon.') } });
+            const message = isSuperadmin
+                ? t('registerLoc.successAdminMsg', 'Location added successfully!')
+                : t('registerLoc.successMsg', 'Proposal submitted! A manager will review it soon.');
+
+            navigate('/locations', { state: { message } });
         } catch (err) {
             console.error(err);
         } finally {

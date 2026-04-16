@@ -69,7 +69,21 @@ export default function Layout({ children }) {
   }, [location.pathname]);
 
   // Filter locations to only show those the user has joined and are confirmed
-  const enrolledLocations = locations.filter(l => (l.status === 'confirmed' || !l.status) && userLocationIds.includes(l.id));
+  // Unless we are on the rankings page, where we want to let the user see all leaderboards
+  const isRankingsPage = location.pathname === '/rankings';
+  const displayLocations = locations.filter(l => {
+    if (l.status !== 'confirmed' && l.status) return false;
+    if (isRankingsPage) return true;
+    return userLocationIds.includes(l.id);
+  });
+
+  // FAB circular text.
+  // CW arc (sweep=1) → text renders OUTSIDE the circle.
+  // r=32: baseline is 2px outside the button border (r=30), visually touching.
+  const fabCircleR = 32;
+  const fabCircumference = parseFloat((2 * Math.PI * fabCircleR).toFixed(2));
+  const fabLabel = t('nav.newMatch', 'New Match').toUpperCase();
+  const fabText = `${fabLabel}  ${fabLabel} `;
 
   const navItems = [
     { path: '/', icon: <LayoutDashboard />, label: t('nav.home', 'Home') },
@@ -84,10 +98,10 @@ export default function Layout({ children }) {
       <header className="p-4 border-b border-white/10 flex flex-col gap-2 sticky top-0 bg-dark/80 backdrop-blur-md z-[1001]">
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-2">
-            <img 
-              src={theme === 'dark' ? "/ntt-logo.svg" : "/ntt-logo-blue.svg"} 
-              alt="NTT" 
-              className="h-8 opacity-90 transition-all duration-300" 
+            <img
+              src={theme === 'dark' ? "/ntt-logo.svg" : "/ntt-logo-blue.svg"}
+              alt="NTT"
+              className="h-8 opacity-90 transition-all duration-300"
             />
             <h1 className="text-2xl font-black tracking-tighter text-white uppercase leading-none">FOOSBALL</h1>
           </div>
@@ -146,7 +160,7 @@ export default function Layout({ children }) {
                   className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 text-xs font-black uppercase tracking-[0.2em] text-white focus:outline-none focus:border-brand/50 appearance-none shadow-2xl"
                 >
                   <option value="all">{t('common.globalView', 'Global View (All Offices)')}</option>
-                  {enrolledLocations.map(loc => (
+                  {displayLocations.map(loc => (
                     <option key={loc.id} value={loc.id}>{loc.name} - {loc.city}</option>
                   ))}
                 </select>
@@ -170,8 +184,44 @@ export default function Layout({ children }) {
         ))}
       </nav>
       {location.pathname !== '/new-match' && (
-        <Link to="/new-match" className="fixed bottom-24 right-6 bg-brand text-dark p-4 rounded-full shadow-lg shadow-brand/20 z-[1001]">
-          <Plus size={28} strokeWidth={3} />
+        <Link to="/new-match" className="fixed bottom-20 right-4 z-[1001] group">
+          {/* 86px container: button 60px + text cap height ~8px each side */}
+          <div className="relative w-[86px] h-[86px] flex items-center justify-center">
+            {/* CW arc (sweep=1) → text on OUTSIDE of circle, baseline at r=32 */}
+            <svg
+              className="absolute inset-0 w-full h-full"
+              style={{ animation: 'spin 9s linear infinite' }}
+              viewBox="0 0 86 86"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <defs>
+                <path
+                  id="fab-circle-path"
+                  d="M43,43 m-32,0 a32,32 0 1,1 64,0 a32,32 0 1,1 -64,0"
+                />
+              </defs>
+              <text
+                fill="#e6b600"
+                style={{
+                  fontSize: '9px',
+                  fontWeight: 900,
+                  fontFamily: 'Inter, sans-serif',
+                }}
+              >
+                <textPath
+                  href="#fab-circle-path"
+                  textLength={fabCircumference}
+                  lengthAdjust="spacingAndGlyphs"
+                >
+                  {fabText}
+                </textPath>
+              </text>
+            </svg>
+            {/* Button */}
+            <div className="relative z-10 bg-brand text-dark p-4 rounded-full shadow-lg shadow-brand/30 group-active:scale-95 transition-transform duration-150">
+              <Plus size={28} strokeWidth={3} />
+            </div>
+          </div>
         </Link>
       )}
     </div>

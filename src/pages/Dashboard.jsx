@@ -150,6 +150,33 @@ export default function Dashboard() {
         )}
       </AnimatePresence>
 
+      {/* Join Location Reminder */}
+      {player && (!player.locationIds || player.locationIds.length === 0) && (
+          <motion.div 
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mx-2 p-6 rounded-[32px] glass border border-white/10 relative overflow-hidden flex flex-col gap-4"
+          >
+            <div className="flex gap-4 items-center">
+                <div className="w-12 h-12 rounded-2xl bg-white/5 text-brand flex items-center justify-center shrink-0 border border-white/5">
+                    <MapPin size={24} />
+                </div>
+                <div>
+                    <h3 className="text-white font-black uppercase tracking-tight text-sm mb-1">{t('dashboard.noLocationTitle', 'No Office Base Joined')}</h3>
+                    <p className="text-[10px] font-bold text-zinc-400 leading-tight">
+                        {t('dashboard.noLocationDesc', 'You haven\'t joined any offices yet. Join one to participate in local rankings and track matches.')}
+                    </p>
+                </div>
+            </div>
+            <button 
+                onClick={() => navigate('/locations')}
+                className="w-full bg-brand text-dark font-black py-4 rounded-2xl uppercase text-[10px] tracking-widest hover:shadow-[0_0_15px_rgba(230,182,0,0.3)] transition-all flex justify-center items-center gap-2"
+            >
+                {t('dashboard.joinOfficeBtn', 'Go to Locations')} <ChevronRight size={14} />
+            </button>
+          </motion.div>
+      )}
+
       {/* Personal Key Stats */}
       <div className="grid grid-cols-2 gap-4 mx-2">
         <div className="bg-brand p-6 rounded-[40px] text-[#070e27] shadow-2xl shadow-brand/20 relative overflow-hidden">

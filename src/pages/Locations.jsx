@@ -53,6 +53,7 @@ export default function Locations() {
                 await updateDoc(playerRef, {
                     locationIds: arrayRemove(locId)
                 });
+                alert(t('locations.leaveSuccess', 'You have successfully left {{name}}.', { name: loc?.name || 'the location' }));
             } else {
                 const updates = { locationIds: arrayUnion(locId) };
                 if (user.tutorialCompleted === false && user.tutorialStep === 1) {
