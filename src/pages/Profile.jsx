@@ -300,7 +300,7 @@ export default function Profile() {
               <select 
                   value={i18n.language?.split('-')[0] || 'en'} 
                   onChange={(e) => i18n.changeLanguage(e.target.value)}
-                  className={`bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-primary font-bold focus:outline-none focus:border-brand/50 transition-all text-xs appearance-none pr-8 bg-no-repeat bg-[length:1.25rem_1.25rem] bg-[right_0.5rem_center] transition-all duration-300`}
+                  className={`bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-primary font-bold focus:outline-none focus:border-brand/50 transition-all text-base md:text-xs appearance-none pr-8 bg-no-repeat bg-[length:1.25rem_1.25rem] bg-[right_0.5rem_center] transition-all duration-300`}
                   style={{
                       backgroundImage: `url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2020%2020%22%3E%3Cpath%20stroke%3D%22${theme === 'dark' ? '%23ffffff' : '%23070e27'}%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%221.5%22%20d%3D%22m6%208%204%204%204-4%22%2F%3E%3C%2Fsvg%3E")`
                   }}
@@ -365,7 +365,7 @@ export default function Profile() {
             type="text"
             value={displayName}
             onChange={(e) => setDisplayName(e.target.value)}
-            className="bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white font-bold focus:outline-none focus:border-brand/50 transition-all placeholder:text-zinc-700"
+            className="bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-base md:text-sm text-white font-bold focus:outline-none focus:border-brand/50 transition-all placeholder:text-zinc-700"
             placeholder={t('profile.displayNameLabel', 'Athlete Display Name')}
           />
         </div>
@@ -384,7 +384,7 @@ export default function Profile() {
           <select
             value={preferredLocId}
             onChange={(e) => setPreferredLocId(e.target.value)}
-            className="bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white font-bold focus:outline-none focus:border-brand/50 transition-all appearance-none"
+            className="bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-base md:text-sm text-white font-bold focus:outline-none focus:border-brand/50 transition-all appearance-none"
           >
             <option value="">{t('profile.selectOffice', 'Select Primary Office')}</option>
             {locations.filter(l => (l.status === 'confirmed' || !l.status) && userLocIds.includes(l.id)).map(loc => (

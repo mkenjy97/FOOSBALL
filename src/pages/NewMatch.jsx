@@ -201,7 +201,7 @@ export default function NewMatch() {
           <select
             value={matchLocationId}
             onChange={(e) => setMatchLocationId(e.target.value)}
-            className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white font-bold focus:outline-none focus:border-brand/50 appearance-none"
+            className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-base md:text-sm text-white font-bold focus:outline-none focus:border-brand/50 appearance-none"
           >
             <option value="">{t('newMatch.selectLocation', 'Select Location')}</option>
             {locations.filter(l => userLocationIds.includes(l.id)).map(loc => (
@@ -353,7 +353,7 @@ export default function NewMatch() {
                 autoFocus
                 value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder={t('common.searchByName', 'Search players by name...')}
-                className="w-full bg-white/5 border border-white/10 rounded-[28px] py-4 pl-14 pr-6 text-white font-bold focus:outline-none focus:border-brand/50 transition-colors placeholder:text-zinc-600"
+                className="w-full bg-white/5 border border-white/10 rounded-[28px] py-4 pl-14 pr-6 text-base md:text-sm text-white font-bold focus:outline-none focus:border-brand/50 transition-colors placeholder:text-zinc-600"
                 autoComplete="off"
               />
             </div>

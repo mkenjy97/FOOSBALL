@@ -231,7 +231,7 @@ export default function Locations() {
                             placeholder={t('locations.searchPlaceholder', 'Find a specific office...')}
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
-                            className="w-full bg-white/5 border border-white/10 rounded-2xl py-3 pl-12 pr-4 text-sm font-bold focus:outline-none focus:border-brand/40 transition-all placeholder:text-zinc-600"
+                            className="w-full bg-white/5 border border-white/10 rounded-2xl py-3 pl-12 pr-4 text-base md:text-sm font-bold focus:outline-none focus:border-brand/40 transition-all placeholder:text-zinc-600"
                         />
                     </div>
                 </div>
@@ -253,7 +253,7 @@ export default function Locations() {
                                                     type="text"
                                                     value={editingLoc.name}
                                                     onChange={e => setEditingLoc({ ...editingLoc, name: e.target.value })}
-                                                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-xs font-bold text-white focus:outline-none focus:border-brand/40"
+                                                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-base md:text-xs font-bold text-white focus:outline-none focus:border-brand/40"
                                                     placeholder={t('locations.namePlaceholder', 'Office Name')}
                                                     autoFocus
                                                 />
@@ -261,7 +261,7 @@ export default function Locations() {
                                                     type="text"
                                                     value={editingLoc.city}
                                                     onChange={e => setEditingLoc({ ...editingLoc, city: e.target.value })}
-                                                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-xs font-bold text-white focus:outline-none focus:border-brand/40"
+                                                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-base md:text-xs font-bold text-white focus:outline-none focus:border-brand/40"
                                                     placeholder={t('locations.cityPlaceholder', 'City')}
                                                 />
                                             </div>

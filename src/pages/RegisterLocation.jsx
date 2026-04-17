@@ -160,7 +160,7 @@ export default function RegisterLocation() {
                                 placeholder="e.g. NTT Tokyo Headquarters"
                                 value={newLocation.name}
                                 onChange={e => setNewLocation({ ...newLocation, name: e.target.value })}
-                                className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white font-bold focus:outline-none focus:border-brand/50 transition-all placeholder:text-zinc-700"
+                                className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-base md:text-sm text-white font-bold focus:outline-none focus:border-brand/50 transition-all placeholder:text-zinc-700"
                                 required
                             />
                         </div>
@@ -171,7 +171,7 @@ export default function RegisterLocation() {
                                 placeholder="e.g. Tokyo"
                                 value={newLocation.city}
                                 onChange={e => setNewLocation({ ...newLocation, city: e.target.value })}
-                                className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white font-bold focus:outline-none focus:border-brand/50 transition-all placeholder:text-zinc-700"
+                                className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-base md:text-sm text-white font-bold focus:outline-none focus:border-brand/50 transition-all placeholder:text-zinc-700"
                             />
                         </div>
                     </div>
@@ -191,7 +191,7 @@ export default function RegisterLocation() {
                                 value={addressSearch}
                                 onChange={e => setAddressSearch(e.target.value)}
                                 onKeyDown={e => e.key === 'Enter' && (e.preventDefault(), handleAddressSearch())}
-                                className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-xs font-bold text-white focus:outline-none focus:border-brand/40"
+                                className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-base md:text-xs font-bold text-white focus:outline-none focus:border-brand/40"
                             />
                             <button 
                                 type="button" 

@@ -151,7 +151,7 @@ export default function Players() {
                         placeholder={t('players.searchPlaceholder', 'Filter by name...')}
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        className="w-full bg-white/5 border border-white/10 rounded-2xl py-3 pl-12 pr-4 text-sm font-bold focus:outline-none focus:border-brand/40 transition-all placeholder:text-zinc-600"
+                        className="w-full bg-white/5 border border-white/10 rounded-2xl py-3 pl-12 pr-4 text-base md:text-sm font-bold focus:outline-none focus:border-brand/40 transition-all placeholder:text-zinc-600"
                     />
                 </div>
 
@@ -200,7 +200,7 @@ export default function Players() {
                                         <select 
                                             value={editingPlayer.role || 'user'}
                                             onChange={e => setEditingPlayer({ ...editingPlayer, role: e.target.value })}
-                                            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-xs font-bold text-white focus:outline-none focus:border-brand/40"
+                                            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-base md:text-xs font-bold text-white focus:outline-none focus:border-brand/40"
                                         >
                                             <option value="user">{t('players.roleUser', 'User')}</option>
                                             <option value="manager">{t('players.roleManager', 'Manager')}</option>

@@ -81,7 +81,7 @@ export default function Login() {
                             type="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            className="bg-card border border-white/10 rounded-2xl px-4 py-3 text-white focus:outline-none focus:border-brand/50 focus:ring-1 focus:ring-brand/50 transition-colors"
+                            className="bg-card border border-white/10 rounded-2xl px-4 py-3 text-base md:text-sm text-white focus:outline-none focus:border-brand/50 focus:ring-1 focus:ring-brand/50 transition-colors"
                             placeholder="player@nttdata.com"
                             required
                         />
@@ -93,7 +93,7 @@ export default function Login() {
                             type="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            className="bg-card border border-white/10 rounded-2xl px-4 py-3 text-white focus:outline-none focus:border-brand/50 focus:ring-1 focus:ring-brand/50 transition-colors"
+                            className="bg-card border border-white/10 rounded-2xl px-4 py-3 text-base md:text-sm text-white focus:outline-none focus:border-brand/50 focus:ring-1 focus:ring-brand/50 transition-colors"
                             placeholder="••••••••"
                             required
                         />

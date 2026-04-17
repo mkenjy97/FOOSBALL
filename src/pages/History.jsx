@@ -323,7 +323,7 @@ export default function History() {
                             autoFocus
                             value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}
                             placeholder={t('common.searchByName', 'Search by name...')}
-                            className="w-full bg-card border border-white/10 rounded-[32px] py-5 pl-16 pr-6 text-white font-bold focus:outline-none focus:border-brand/50 transition-colors"
+                            className="w-full bg-card border border-white/10 rounded-[32px] py-5 pl-16 pr-6 text-base md:text-sm text-white font-bold focus:outline-none focus:border-brand/50 transition-colors"
                             autoComplete="off"
                         />
                     </div>
