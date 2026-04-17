@@ -5,7 +5,7 @@ import { useAuth } from '../context/AuthContext';
 import { useLocations } from '../context/LocationContext';
 import { MapPin, Plus, Building2, UserPlus, UserMinus, Search, Trash2, Edit3, X, Check } from 'lucide-react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import L from 'leaflet';
 import { useTranslation } from 'react-i18next';
 
@@ -26,10 +26,34 @@ export default function Locations() {
     const { locations } = useLocations();
     const { t } = useTranslation();
     const navigate = useNavigate();
+    const locationPage = useLocation();
     
     const [userLocs, setUserLocs] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
     const [editingLoc, setEditingLoc] = useState(null);
+
+    // Handle deep links / QR code redirects
+    useEffect(() => {
+        const params = new URLSearchParams(locationPage.search);
+        const qLocationId = params.get('locationId');
+        
+        if (qLocationId && locations.length > 0) {
+            const loc = locations.find(l => l.id === qLocationId);
+            if (loc) {
+                setSearchQuery(loc.name);
+                // Clear the URL parameter so refreshing doesn't get stuck
+                navigate('/locations', { replace: true });
+                
+                // Scroll down to the list area with a slight delay to allow rendering
+                setTimeout(() => {
+                    const el = document.getElementById(`loc-${loc.id}`);
+                    if (el) {
+                        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                }, 300);
+            }
+        }
+    }, [locationPage.search, locations, navigate]);
 
     useEffect(() => {
         if (!user) return;

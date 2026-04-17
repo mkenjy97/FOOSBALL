@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 import { auth, db } from '../services/firebase';
@@ -15,6 +15,9 @@ export default function Login() {
     const { theme } = useTheme();
     const { t } = useTranslation();
     const navigate = useNavigate();
+    const location = useLocation();
+    
+    const from = location.state?.from?.pathname + (location.state?.from?.search || '') || '/';
 
     const handleAuth = async (e) => {
         e.preventDefault();
@@ -34,7 +37,7 @@ export default function Login() {
             } else {
                 await signInWithEmailAndPassword(auth, email, password);
             }
-            navigate('/');
+            navigate(from, { replace: true });
         } catch (err) {
             if (err.code === 'auth/invalid-credential' || err.code === 'auth/user-not-found' || err.code === 'auth/wrong-password') {
                 setError(t('login.errorInvalid', 'Invalid email or password.'));
