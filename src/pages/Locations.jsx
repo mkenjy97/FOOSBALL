@@ -3,7 +3,7 @@ import { db } from '../services/firebase';
 import { doc, onSnapshot, updateDoc, arrayUnion, arrayRemove, deleteDoc } from 'firebase/firestore';
 import { useAuth } from '../context/AuthContext';
 import { useLocations } from '../context/LocationContext';
-import { MapPin, Plus, Building2, UserPlus, UserMinus, Search, ChevronRight, Trash2, Edit3, X, Check } from 'lucide-react';
+import { MapPin, Plus, Building2, UserPlus, UserMinus, Search, Trash2, Edit3, X, Check } from 'lucide-react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { useNavigate } from 'react-router-dom';
 import L from 'leaflet';
@@ -114,6 +114,11 @@ export default function Locations() {
         }
     };
 
+    const handleProposeLocation = () => {
+        alert(t('locations.proposeAlert', "L'aggiunta di una nuova sede richiede l'approvazione di un manager."));
+        navigate('/locations/register');
+    };
+
     return (
         <div className="space-y-8 pb-32">
             {user?.tutorialCompleted === false && (
@@ -144,9 +149,18 @@ export default function Locations() {
                 </div>
             )}
 
-            <div className="px-2">
-                <h2 className="text-3xl font-black text-white tracking-tighter uppercase transition-colors">{t('locations.title', 'Locations')}</h2>
-                <p className="text-zinc-500 text-[10px] font-black uppercase tracking-widest mt-1">{t('locations.subtitle', 'Multi-Office Management')}</p>
+            <div className="px-2 flex items-center justify-between">
+                <div>
+                    <h2 className="text-3xl font-black text-white tracking-tighter uppercase transition-colors">{t('locations.title', 'Locations')}</h2>
+                    <p className="text-zinc-500 text-[10px] font-black uppercase tracking-widest mt-1">{t('locations.subtitle', 'Multi-Office Management')}</p>
+                </div>
+                <button
+                    onClick={handleProposeLocation}
+                    className="flex items-center gap-2 bg-brand/10 border border-brand/30 text-brand px-4 py-2 rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-brand/20 transition-all"
+                >
+                    <Plus size={14} />
+                    {t('locations.proposeBtn', 'Nuova Sede')}
+                </button>
             </div>
 
             {/* Global Map Overview */}
@@ -176,24 +190,7 @@ export default function Locations() {
                 </div>
             )}
 
-            {/* Propose Location CTA */}
-            <div className="px-2">
-                <button 
-                    onClick={() => navigate('/locations/register')}
-                    className="w-full glass p-6 rounded-[32px] border border-white/5 flex items-center justify-between group hover:border-brand/30 transition-all"
-                >
-                    <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 rounded-2xl bg-brand/10 text-brand flex items-center justify-center">
-                            <Plus size={24} />
-                        </div>
-                        <div className="text-left">
-                            <h3 className="font-black text-white uppercase tracking-tight">{t('locations.proposeCta', 'Propose New Base')}</h3>
-                            <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">{t('locations.proposeSubtitle', 'New office requires manager approval')}</p>
-                        </div>
-                    </div>
-                    <ChevronRight className="text-zinc-500 group-hover:text-brand transition-colors" />
-                </button>
-            </div>
+
 
             {/* Location List */}
             <div className="space-y-4">

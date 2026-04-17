@@ -53,7 +53,8 @@
     "profile": "Profilo",
     "rankings": "Classifiche",
     "locations": "Sedi",
-    "players": "Giocatori"
+    "players": "Giocatori",
+    "appTitle": "CALCETTO"
   },
   "dashboard": {
     "title": "Dashboard",
@@ -214,7 +215,8 @@
     "matches": "Partite",
     "victories": "Vittorie",
     "historyTitle": "Cronologia Match",
-    "noHistory": "Nessuna cronologia trovata"
+    "noHistory": "Nessuna cronologia trovata",
+    "locationsTitle": "Sedi Iscritte"
   },
   "rankings": {
     "title": "LEADERBOARD",

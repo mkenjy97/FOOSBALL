@@ -52,6 +52,10 @@ export default function Rankings() {
     : matches.filter(m => m.locationId === selectedLocationId))
     .filter(m => m.status !== 'pending');
 
+  const filteredPlayers = selectedLocationId === 'all'
+    ? players
+    : players.filter(p => p.locationIds?.includes(selectedLocationId));
+
   // Calculate stats per player based on mode
   const getRankedPlayers = () => {
     return players
@@ -150,7 +154,7 @@ export default function Rankings() {
           <TrendingUp className={mode === '2v2' ? 'text-brand' : 'text-white'} size={20} />
           <div>
             <p className="text-[8px] font-black text-zinc-500 uppercase">{t('rankings.leagueSize', 'League Size')}</p>
-            <p className="text-sm font-bold text-white">{t('rankings.playersCount', '{{count}} Players', { count: players.length })}</p>
+            <p className="text-sm font-bold text-white">{t('rankings.playersCount', '{{count}} Players', { count: filteredPlayers.length })}</p>
           </div>
         </div>
         <div className="glass p-5 rounded-[32px] flex items-center gap-3">

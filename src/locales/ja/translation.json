@@ -64,7 +64,8 @@
     "profile": "プロフィール",
     "rankings": "ランキング",
     "locations": "拠点",
-    "players": "選手"
+    "players": "選手",
+    "appTitle": "フットボール"
   },
   "dashboard": {
     "title": "ダッシュボード",

@@ -213,7 +213,8 @@
     "matches": "Matches",
     "victories": "Victories",
     "historyTitle": "Match History",
-    "noHistory": "No matching history found"
+    "noHistory": "No matching history found",
+    "locationsTitle": "Joined Offices"
   },
   "rankings": {
     "title": "LEADERBOARD",

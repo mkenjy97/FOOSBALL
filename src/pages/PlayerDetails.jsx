@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { db } from '../services/firebase';
 import { doc, getDoc, collection, query, onSnapshot, orderBy } from 'firebase/firestore';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, Trophy, Calendar, Users, User } from 'lucide-react';
+import { ChevronLeft, Trophy, Calendar, Users, User, MapPin } from 'lucide-react';
 import Avatar from '../components/Avatar';
 import { useLocations } from '../context/LocationContext';
 import { useTranslation } from 'react-i18next';
@@ -120,6 +120,33 @@ export default function PlayerDetails() {
                     </div>
                 </div>
             </div>
+
+            {/* Joined Locations */}
+            {player.locationIds && player.locationIds.length > 0 && (
+              <div className="mx-2 glass rounded-[32px] border border-white/10 p-6 space-y-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <MapPin size={14} className="text-brand" />
+                  <h3 className="text-[10px] font-black text-zinc-500 uppercase tracking-widest">
+                    {t('playerDetails.locationsTitle', 'Joined Offices')}
+                  </h3>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {player.locationIds.map(locId => {
+                    const loc = locations.find(l => l.id === locId);
+                    if (!loc) return null;
+                    return (
+                      <span
+                        key={locId}
+                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-brand/10 border border-brand/20 text-brand text-[10px] font-black uppercase tracking-wide"
+                      >
+                        <MapPin size={9} />
+                        {loc.name}
+                      </span>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
 
             <div className="px-2 space-y-6">
                 <div className="flex items-center justify-between">

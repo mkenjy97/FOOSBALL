@@ -91,3 +91,8 @@ body {
 .leaflet-marker-icon {
   filter: drop-shadow(0 0 5px var(--brand));
 }
+
+/* Hide Leaflet attribution watermark */
+.leaflet-control-attribution {
+  display: none !important;
+}

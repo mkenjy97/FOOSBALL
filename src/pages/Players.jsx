@@ -133,7 +133,9 @@ export default function Players() {
             <div className="px-2 flex justify-between items-end">
                 <div>
                     <h2 className="text-3xl font-black text-white tracking-tighter">{t('players.title', 'PLAYERS')}</h2>
-                    <p className="text-zinc-500 text-[10px] font-black uppercase tracking-widest mt-1">{t('players.subtitle', 'League Directory')}</p>
+                    <p className="text-zinc-500 text-[10px] font-black uppercase tracking-widest mt-1">
+                        {t('players.subtitle', 'League Directory')} &middot; {filteredPlayers.length} {t('players.playersCount', 'Players')}
+                    </p>
                 </div>
                 <div className="flex p-1 bg-white/5 rounded-xl border border-white/5">
                     <button onClick={() => setMode('2v2')} className={`px-3 py-1.5 rounded-lg text-[10px] font-black transition-all flex items-center gap-1.5 ${mode === '2v2' ? 'bg-brand text-black shadow-lg shadow-brand/20' : 'text-zinc-500'}`}><Users size={12}/> {t('players.mode2v2', '2V2')}</button>

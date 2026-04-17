@@ -103,7 +103,7 @@ export default function Layout({ children }) {
               alt="NTT"
               className="h-8 opacity-90 transition-all duration-300"
             />
-            <h1 className="text-2xl font-black tracking-tighter text-white uppercase leading-none">FOOSBALL</h1>
+            <h1 className="text-2xl font-black tracking-tighter text-white uppercase leading-none">{t('nav.appTitle', 'FOOSBALL')}</h1>
           </div>
           <div className="flex items-center gap-3">
             <Link to="/notifications" className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-zinc-500 hover:text-white transition-colors relative">
