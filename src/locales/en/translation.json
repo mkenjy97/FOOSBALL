@@ -53,7 +53,8 @@
     "profile": "Profile",
     "rankings": "Rankings",
     "locations": "Offices",
-    "players": "Players"
+    "players": "Players",
+    "appTitle": "FOOSBALL"
   },
   "dashboard": {
     "title": "Dashboard",
